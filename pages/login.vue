@@ -20,11 +20,11 @@
                 type="email"
                 required
                 placeholder="E-mail"
-              ></b-form-input>
+              />
             </b-form-group>
 
             <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-              <b-input type="password" id="text-password" v-model="password"></b-input>
+              <b-input type="password" id="text-password" v-model="password"/>
             </b-form-group>
 
             <b-button type="submit" variant="primary">Submit</b-button>
