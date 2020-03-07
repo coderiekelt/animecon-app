@@ -23,6 +23,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/scss/bootstrap.scss',
   ],
   /*
   ** Plugins to load before mounting the App
@@ -58,5 +59,15 @@ export default {
     */
     extend (config, ctx) {
     }
-  }
+  },
+  rules: [
+    {
+      test: /\.s[ac]ss$/i,
+      use: ['style-loader','css-loader','sass-loader',],
+    },
+  ],
+  bootstrapVue: {
+    bootstrapCSS: false,
+    bootstrapVueCSS: false
+  },
 }
