@@ -12,13 +12,13 @@ const anonymousState = {
 export const state = () => (JSON.parse(JSON.stringify(anonymousState))); // Copy instead of refer
 
 export const mutations = {
-  login(oauth, username, roles) {
+  login(state, payload) {
     state.authenticated = true;
-    state.oauth = oauth;
-    state.username = username;
-    state.roles = roles;
+    state.oauth = payload.oauth;
+    state.username = payload.username;
+    state.roles = payload.roles;
   },
-  logout() {
+  logout(state) {
     state.authenticated = anonymousState.authenticated;
     state.oauth = anonymousState.oauth;
     state.username = anonymousState.username;
