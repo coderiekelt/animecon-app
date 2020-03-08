@@ -21,8 +21,6 @@
                                 <em>{{$store.state.auth.username}}</em>
                             </template>
                             <b-dropdown-item href="/login" v-if="!$store.state.auth.authenticated">Sign in</b-dropdown-item>
-                            <b-dropdown-item href="/profile" v-if="$store.state.auth.authenticated">Profile
-                            </b-dropdown-item>
                             <b-dropdown-item href="/logout" v-if="$store.state.auth.authenticated">Sign Out
                             </b-dropdown-item>
                         </b-nav-item-dropdown>
