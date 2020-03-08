@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import Activity from '~/components/activities/Activity'
+    import Activity from '~/components/activities/detail/Activity'
 
     export default {
         layout: 'anime',

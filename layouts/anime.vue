@@ -7,7 +7,7 @@
                     <span class="header-text">Animecon</span>
                 </div>
             </div>
-            <b-navbar variant="light">
+            <b-navbar class="anime-navbar" variant="light">
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
                 <b-collapse id="nav-collapse" is-nav>
@@ -29,8 +29,15 @@
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
+            <div class="content">
+                <div class="container">
+                    <nuxt/>
+                </div>
+            </div>
+            <div class="footer">
+                CONCEPT - NOT SUITABLE FOR PRODUCTION USE
+            </div>
         </div>
-        <nuxt/>
     </div>
 </template>
 
@@ -38,5 +45,23 @@
     .header-text {
         font-size: 32pt;
         color: #fff;
+    }
+
+    .content {
+        background-color: #fff;
+        padding-bottom: 20px;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+
+    .footer {
+        width: 100%;
+        text-align: center;
+        color: red;
+    }
+
+    .anime-navbar {
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
     }
 </style>
