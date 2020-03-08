@@ -5,7 +5,7 @@
                 {{activityInfo.title}}
             </h1>
             <p>{{activityInfo.description}}</p>
-            <Timetable :activity="activityInfo.id"/>
+            <Timetable :payload="activityInfo.timeslots"/>
         </div>
         <div v-if="!loaded">
             <center>

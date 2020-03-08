@@ -31,26 +31,18 @@
         props: ['timeslot'],
         computed: {
             loaded() {
-                return this.timeslot !== null && this.location !== null && this.activity !== null;
+                return this.timeslot !== null && this.location !== null;
             }
         },
         data() {
             return {
-                location: null,
                 timeslot: null,
-                activity: null,
+                location: null,
             }
         },
         mounted() {
             this.timeslot = this.$props.timeslot;
-
-            this.$animecon.sendAuthorizedRequest('GET', this.timeslot.location + '.json').then(response => {
-                this.location = response.data;
-            });
-
-            this.$animecon.sendAuthorizedRequest('GET', this.timeslot.activity + '.json').then(response => {
-                this.activity = response.data;
-            });
+            this.location = this.timeslot.location;
         }
     }
 </script>

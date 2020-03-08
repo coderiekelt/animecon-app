@@ -28,7 +28,7 @@
         components: {
             Timeslot,
         },
-        props: ['activity'],
+        props: ['payload'],
         data() {
             return {
                 loading: false,
@@ -36,13 +36,7 @@
             }
         },
         mounted() {
-            this.loading = true;
-
-            this.$animecon.sendAuthorizedRequest('GET', '/timeslots.json?activity.id=' + this.$props.activity).then(response => {
-                this.loading = false;
-
-                this.timeslots = response.data;
-            });
+            this.timeslots = this.$props.payload;
         },
     }
 </script>
