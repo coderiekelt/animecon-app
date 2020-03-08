@@ -54,8 +54,8 @@ let $animecon = {
     },
     // Sends a request with authorization provided by the OAUTH api
     sendAuthorizedRequest(method, endpoint, body) {
-        console.log(this.app.$store.state.auth.oauth);
-        console.log(this.app.$store.auth.oauth.accessToken);
+        console.log(this.store.state.auth.oauth);
+        console.log(this.store.auth.oauth.accessToken);
         return new Promise(resolve => {
             axios({
                 method: method,
