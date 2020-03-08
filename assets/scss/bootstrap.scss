@@ -1,2 +1,10 @@
+@import 'animecon';
+
+$primary: #14376A;
+
 @import 'bootstrap/scss/bootstrap.scss';
 @import 'bootstrap-vue/src/index.scss';
+
+body {
+    background-color: #5A85AB;
+}

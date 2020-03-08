@@ -28,12 +28,9 @@
 </template>
 
 <script>
-    import Logo from '~/components/Logo.vue'
-
     export default {
         layout: 'anime',
         components: {
-            Logo
         }
     }
 </script>

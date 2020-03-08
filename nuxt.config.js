@@ -4,7 +4,7 @@ export default {
     ** Headers of the page
     */
     head: {
-        title: process.env.npm_package_name || '',
+        title: 'Animecon',
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -23,13 +23,13 @@ export default {
     */
     css: [
         '@/assets/scss/bootstrap.scss',
-        '@/assets/scss/animecon.scss',
     ],
     /*
     ** Plugins to load before mounting the App
     */
     plugins: [
-        { src: '~/plugins/vuex-persist', ssr: false }
+        { src: '~/plugins/vuex-persist', ssr: false },
+        { src: '~/plugins/animecon-rest', ssr: false }
     ],
     /*
     ** Nuxt.js dev-modules

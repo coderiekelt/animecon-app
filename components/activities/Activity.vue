@@ -34,13 +34,7 @@
             }
         },
         mounted() {
-            let accessToken = this.$store.state.auth.oauth;
-
-            axios.get(process.env.API_BASE + '/activities/' + this.$props.id + '.json', {
-                headers: {
-                    'Authorization': 'Bearer ' + accessToken,
-                }
-            }).then(response => {
+            this.$animecon.sendAuthorizedRequest('GET','/activities/' + this.$props.id + '.json').then(response => {
                 this.loaded = true;
                 this.activityInfo = response.data;
             });

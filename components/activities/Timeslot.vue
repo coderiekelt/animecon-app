@@ -10,6 +10,16 @@
                 </p>
             </div>
         </div>
+        <div v-else>
+            <div class="card-body">
+                <p class="card-text" style="text-align: center;" id="spinner">
+                    UwU
+                </p>
+                <p class="card-text" style="text-align: center;">
+                    Loading!
+                </p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -32,32 +42,13 @@
             }
         },
         mounted() {
-            let locationLoaded = false;
-            let activityLoaded = false;
-
             this.timeslot = this.$props.timeslot;
 
-            let accessToken = this.$store.state.auth.oauth;
-
-            axios.get(process.env.API_BASE + this.timeslot.location + '.json', {
-                headers: {
-                    'Authorization': 'Bearer ' + accessToken,
-                }
-            }).then(response => {
-                locationLoaded = true;
-
-                if (activityLoaded) {
-                    this.loaded = true;
-                }
-
+            this.$animecon.sendAuthorizedRequest('GET', this.timeslot.location + '.json').then(response => {
                 this.location = response.data;
             });
 
-            axios.get(process.env.API_BASE + this.timeslot.activity + '.json', {
-                headers: {
-                    'Authorization': 'Bearer ' + accessToken,
-                }
-            }).then(response => {
+            this.$animecon.sendAuthorizedRequest('GET', this.timeslot.activity + '.json').then(response => {
                 this.activity = response.data;
             });
         }
@@ -65,5 +56,22 @@
 </script>
 
 <style scoped>
-
+    #spinner {
+        text-align: center;
+        animation-name: spin, depth;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-duration: 3s;
+    }
+    @keyframes spin {
+        from { transform: rotateY(0deg); }
+        to { transform: rotateY(-360deg); }
+    }
+    @keyframes depth {
+        0% { text-shadow: 0 0 black; }
+        25% { text-shadow: 1px 0 black, 2px 0 black, 3px 0 black, 4px 0 black, 5px 0 black; }
+        50% { text-shadow: 0 0 black; }
+        75% { text-shadow: -1px 0 black, -2px 0 black, -3px 0 black, -4px 0 black, -5px 0 black; }
+        100% { text-shadow: 0 0 black; }
+    }
 </style>

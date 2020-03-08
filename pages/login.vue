@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-6 offset-3">
+                <div class="alert alert-danger" v-if="failed">Invalid username / password!</div>
                 <b-card header="Sign in to your account" header-tag="header">
                     <b-form @submit="authenticate">
                         <b-form-group
@@ -42,15 +42,17 @@
             return {
                 username: '',
                 password: '',
+                failed: false,
             }
         },
         methods: {
-            authenticate(event) {
-                event.preventDefault()
+            async authenticate(event) {
+                event.preventDefault();
+
+                this.failed = false;
 
                 let clientId = process.env.OAUTH_CLIENT_ID;
                 let clientSecret = process.env.OAUTH_CLIENT_SECRET;
-                let tokenEndpoint = process.env.OAUTH_BASE + '/token';
 
                 let body = new FormData();
                 body.set('grant_type', 'password');
@@ -59,24 +61,9 @@
                 body.set('username', this.username);
                 body.set('password', this.password);
 
-                axios({
-                    method: 'post',
-                    url: tokenEndpoint,
-                    data: body,
-                    config: { headers: {'Content-Type': 'multipart/form-data' }}
-                }).then(response => {
-                    this.$store.commit('auth/login',
-                        {
-                            oauth: {
-                                accessToken: response.data.access_token,
-                                refreshToken: response.data.refresh_token,
-                                tokenExpires: (new Date()).getTime() + response.data.expires_in,
-                            },
-                            username: this.username,
-                            roles: ['ROLE_USER'], // TO-DO: Fetch from API?
-                        }
-                    );
-                });
+                let result = await this.$animecon.sendAuthorizationRequest(body);
+
+                this.failed = !result;
             },
         }
     }
