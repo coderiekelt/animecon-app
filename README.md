@@ -1,16 +1,18 @@
-# anime-app
+# Animecon PWA
+**This is currently only an concept**
 
-> AnimeCon App
-
-## Build Setup
-
-``` bash
+### Setup
+#### Development
+Copy `.env.dist` to `.env` and set the client id, client secret and if necessary the API base paths.
+```bash
 # install dependencies
 $ yarn install
 
 # serve with hot reload at localhost:3000
 $ yarn dev
-
+```
+#### Production
+```bash
 # build for production and launch server
 $ yarn build
 $ yarn start
@@ -18,5 +20,3 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
