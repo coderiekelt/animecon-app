@@ -64,6 +64,12 @@
                 let result = await this.$animecon.sendAuthorizationRequest(body);
 
                 this.failed = !result;
+
+                if (result) {
+                    this.$router.push({
+                        path: '/'
+                    })
+                }
             },
         }
     }

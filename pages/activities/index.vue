@@ -67,7 +67,6 @@
                         return;
                     }
 
-                    console.log('hier');
                     this.sortDays();
                 });
             },
