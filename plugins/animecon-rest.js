@@ -53,9 +53,11 @@ let $animecon = {
         });
     },
     // Sends a request with authorization provided by the OAUTH api
-    sendAuthorizedRequest(method, endpoint, body) {
-        console.log(this.store.state.auth.oauth);
-        console.log(this.store.state.auth.oauth.accessToken);
+    async sendAuthorizedRequest(method, endpoint, body) {
+        if (this.store.state.auth.oauth.accessToken === null) {
+            await new Promise(r => setTimeout(r, 2000));
+        }
+
         return new Promise(resolve => {
             axios({
                 method: method,
@@ -74,6 +76,7 @@ let $animecon = {
 };
 
 export default ({store, app}) => {
+    console.log(store.state.auth.oauth.accessToken);
     $animecon.store = store;
 }
 
