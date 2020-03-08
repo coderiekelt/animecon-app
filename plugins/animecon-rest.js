@@ -75,8 +75,7 @@ let $animecon = {
     }
 };
 
-export default ({store, app}) => {
-    console.log(store.state.auth.oauth.accessToken);
+export default ({store}) => {
     $animecon.store = store;
 }
 

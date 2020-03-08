@@ -36,14 +36,9 @@
             }
         },
         mounted() {
-            let accessToken = this.$store.state.auth.oauth;
             this.loading = true;
 
-            axios.get(process.env.API_BASE + '/timeslots.json?activity.id=' + this.$props.activity, {
-                headers: {
-                    'Authorization': 'Bearer ' + accessToken,
-                }
-            }).then(response => {
+            this.$animecon.sendAuthorizedRequest('GET', '/timeslots.json?activity.id=' + this.$props.activity).then(response => {
                 this.loading = false;
 
                 this.timeslots = response.data;

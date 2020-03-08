@@ -1,7 +1,18 @@
 <template>
-    <li v-if="loaded" class="list-group-item">
-<!--        <h5>{{activity.description}}</h5>-->
-    </li>
+    <div>
+        <a :href="'/activities/' + activity.id" class="list-group-item list-group-item-action" v-if="loaded && activity" v-bind:style="style">
+            <h5>
+                {{activity.title}}
+                <span style="float: right;">
+                {{$moment(timeslot.dateStartsAt).format('HH:mm')}}
+            </span>
+            </h5>
+        </a>
+        <li class="list-group-item" v-else>
+            Nope!
+        </li>
+    </div>
+
 </template>
 
 <script>
@@ -12,27 +23,38 @@
         props: ['payload'],
         computed: {
             loaded() {
-                return this.timeslot !== null && this.location !== null && this.activity !== null;
+                return this.timeslot !== null && this.activity !== null;
+            },
+            style() {
+                let style = {
+                    borderTopLeftRadius: '0px',
+                    borderBottomLeftRadius: '0px',
+                    borderLeftColor: '#14376A',
+                    borderLeftWidth: '3px',
+                    cursor: 'pointer',
+                };
+
+                style.borderLeftColor = this.activity.activityType.cssBackgroundColor;
+
+                return style;
             }
         },
         data() {
             return {
-                location: null,
                 timeslot: null,
                 activity: null,
             }
         },
         mounted() {
             this.timeslot = this.$props.payload;
-
-            this.$animecon.sendAuthorizedRequest('GET', this.timeslot.location + '.json').then(response => {
-                this.location = response.data;
-            });
-
-            this.$animecon.sendAuthorizedRequest('GET', this.timeslot.activity + '.json').then(response => {
-                console.log(response);
-                this.activity = response.data;
-            });
+            this.activity = this.timeslot.activity;
+        },
+        methods: {
+            goToActivity() {
+                this.$router.push({
+                    path: '/activities/' + this.activity.id,
+                })
+            }
         }
     }
 </script>
