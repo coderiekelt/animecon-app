@@ -73,7 +73,7 @@ let $animecon = {
     }
 };
 
-export default ({store, app}, inject) => {
+export default ({store, app}) => {
     $animecon.store = store;
 }
 

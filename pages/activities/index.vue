@@ -27,7 +27,6 @@
             ActivityType, Timeslot
         },
         mounted() {
-            console.log(this.$store.state.auth.oauth);
             this.$animecon.sendAuthorizedRequest('GET', '/activity-types.json').then(response => {
                 this.activityTypes = response.data;
             });
