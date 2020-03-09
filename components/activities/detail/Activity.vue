@@ -3,6 +3,9 @@
         <div v-if="loaded">
             <h4>
                 {{activityInfo.title}}
+                <span style="float: right;">
+                    <ActivityType :payload="activityInfo.activityType"/>
+                </span>
             </h4>
             <div class="row">
                 <div class="col-md-3" v-if="hasLargeImage">
@@ -27,12 +30,13 @@
     import axios from 'axios';
 
     import Timetable from './Timetable'
+    import ActivityType from '../shared/ActivityType';
 
     export default {
         name: 'Activity',
         props: ['id'],
         components: {
-            Timetable,
+            Timetable, ActivityType
         },
         computed: {
             imageBase() {
