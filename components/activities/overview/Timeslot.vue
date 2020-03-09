@@ -1,12 +1,10 @@
 <template>
     <div>
         <a :href="'/activities/' + activity.id" class="list-group-item list-group-item-action" v-if="loaded && activity" v-bind:style="style">
-            <h5>
-                {{activity.title}}
-                <span style="float: right;">
+            {{activity.title}}
+            <span style="float: right;">
                 {{$moment(timeslot.dateStartsAt).format('HH:mm')}}
             </span>
-            </h5>
         </a>
         <li class="list-group-item" v-else>
             Nope!

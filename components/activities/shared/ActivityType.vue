@@ -18,7 +18,8 @@
                     backgroundColor: this.typeInfo.cssBackgroundColor,
                     color: this.typeInfo.cssForegroundColor,
                     fontWeight: this.typeInfo.cssBold ? 'bold' : 'normal',
-                    marginLeft: '5px',
+                    marginRight: '5px',
+                    cursor: 'pointer',
                 };
 
                 if (this.typeInfo.cssIsStrikeThrough) {

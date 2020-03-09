@@ -1,0 +1,22 @@
+h1, h2, h3, h4, h5 {
+    font-weight: bold !important;
+    color: $primary;
+}
+
+.virtual-header {
+    font-weight: bold !important;
+    color: $primary;
+}
+
+.text-small {
+    font-size: 11px !important;
+}
+
+.headliners {
+    width: 100%;
+    margin-bottom: 10px;
+
+    img {
+        width: 100%;
+    }
+}

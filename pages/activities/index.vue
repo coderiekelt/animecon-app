@@ -1,6 +1,8 @@
 <template>
     <div>
-        <ActivityType v-for="activityType in activityTypes" v-bind:key="activityType.id" :payload="activityType" />
+        <a v-for="activityType in activityTypes" v-bind:key="activityType.id" @click="filterActivityType(activityType)">
+            <ActivityType :payload="activityType" />
+        </a>
         <div v-for="day in days" v-if="loaded">
             <h4>{{day.date}}</h4>
             <ul class="list-group">
@@ -33,6 +35,8 @@
                 timeslots: [],
                 unsortedTimeslotsByDay: {},
                 days: [],
+                filteredType: null,
+                filtering: false,
             };
         },
         components: {
@@ -46,6 +50,19 @@
             this.fetchTimeslots(1);
         },
         methods: {
+            filterActivityType(activityType) {
+                if (this.filtering) {
+                    return;
+                }
+
+                this.loaded = false;
+                this.unsortedTimeslotsByDay = {};
+
+                this.filtering = true;
+                this.filteredType = activityType;
+
+                this.fetchTimeslots(1);
+            },
             async handleTimeslots(timeslots) {
                 timeslots.forEach(timeslot => {
                     let dayKey = this.$moment(timeslot.dateStartsAt).format('YYYY-MM-DD');
@@ -58,7 +75,13 @@
                 });
             },
             async fetchTimeslots(page) {
-                this.$animecon.sendAuthorizedRequest('GET', '/timeslots.json?activity.visible=1&dateStartsAt[after]=2019-01-01&page=' + page).then(response => {
+                let endpoint = '/timeslots.json?activity.visible=1&dateStartsAt[after]=2019-01-01&page=' + page;
+
+                if (this.filteredType !== null) {
+                    endpoint += '&activity.activityType.id=' + this.filteredType.id;
+                }
+
+                this.$animecon.sendAuthorizedRequest('GET', endpoint).then(response => {
                     this.handleTimeslots(response.data);
 
                     if (response.data.length > 0) {
@@ -67,10 +90,16 @@
                         return;
                     }
 
+                    if (this.filtering) {
+                        this.filtering = false;
+                    }
+
                     this.sortDays();
                 });
             },
             sortDays() {
+                this.days = [];
+
                 Object.keys(this.unsortedTimeslotsByDay).forEach(key => {
                     this.unsortedTimeslotsByDay[key].sort((a, b) => {
                         return this.$moment(a.dateStartsAt).format('x') > this.$moment(b.dateStartsAt).format('x');

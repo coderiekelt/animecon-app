@@ -45,7 +45,8 @@ export default {
         'bootstrap-vue/nuxt',
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
-        '@nuxtjs/moment'
+        '@nuxtjs/moment',
+        '@nuxtjs/device'
     ],
     /*
     ** Axios module configuration

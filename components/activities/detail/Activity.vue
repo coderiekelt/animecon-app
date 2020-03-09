@@ -1,11 +1,18 @@
 <template>
     <div>
         <div v-if="loaded">
-            <h1>
+            <h4>
                 {{activityInfo.title}}
-            </h1>
-            <p>{{activityInfo.description}}</p>
-            <Timetable :payload="activityInfo.timeslots"/>
+            </h4>
+            <div class="row">
+                <div class="col-md-3" v-if="hasLargeImage">
+                    <img style="width: 100%" :src="imageBase + activityInfo.largeImage"></img>
+                </div>
+                <div :class="'col-md-' + (hasLargeImage ? '9' : '12')">
+                    <p>{{activityInfo.description}}</p>
+                    <Timetable :payload="activityInfo.timeslots"/>
+                </div>
+            </div>
         </div>
         <div v-if="!loaded">
             <center>
@@ -26,6 +33,14 @@
         props: ['id'],
         components: {
             Timetable,
+        },
+        computed: {
+            imageBase() {
+                return process.env.API_BASE + '/images/';
+            },
+            hasLargeImage() {
+                return this.activityInfo.largeImage !== null;
+            }
         },
         data() {
             return {

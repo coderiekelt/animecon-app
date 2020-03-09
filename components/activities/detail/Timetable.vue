@@ -1,20 +1,8 @@
 <template>
     <div>
-        <div class="row" v-if="timeslots.length">
-            <div class="col-md-3" v-for="timeslot in timeslots">
-                <Timeslot :timeslot="timeslot" />
-            </div>
-        </div>
-        <div v-if="loading && !timeslots.length">
-            <div class="card-body">
-                <p class="card-text" style="text-align: center;" id="spinner">
-                    UwU
-                </p>
-                <p class="card-text" style="text-align: center;">
-                    Loading!
-                </p>
-            </div>
-        </div>
+        <ul class="list-group" v-if="timeslots.length">
+            <Timeslot v-for="timeslot in timeslots" :timeslot="timeslot" />
+        </ul>
     </div>
 </template>
 

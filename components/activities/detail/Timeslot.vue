@@ -1,26 +1,10 @@
 <template>
-    <div>
-        <div class="card" v-if="loaded">
-            <div class="card-body">
-                <h5 class="card-title">{{location.name}}</h5>
-                <p class="card-text">
-                    <b>{{$moment(timeslot.dateStartsAt).format('dddd')}}</b><br>
-                    From {{$moment(timeslot.dateStartsAt).format('HH:mm')}}<br>
-                    Until {{$moment(timeslot.dateEndsAt).format('HH:mm')}}
-                </p>
-            </div>
-        </div>
-        <div v-else>
-            <div class="card-body">
-                <p class="card-text" style="text-align: center;" id="spinner">
-                    UwU
-                </p>
-                <p class="card-text" style="text-align: center;">
-                    Loading!
-                </p>
-            </div>
-        </div>
-    </div>
+    <li class="list-group-item" v-if="loaded">
+        {{location.name}}
+        <span style="float: right;">
+            {{$moment(timeslot.dateStartsAt).format('dddd')}} {{$moment(timeslot.dateStartsAt).format('HH:mm')}} - {{$moment(timeslot.dateEndsAt).format('HH:mm')}}
+        </span>
+    </li>
 </template>
 
 <script>
